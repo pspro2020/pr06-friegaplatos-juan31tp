@@ -21,9 +21,9 @@ public class Fregador implements Runnable{
         Plato plato;
         while (!Thread.currentThread().isInterrupted()){
             try {
-                plato=bandejaSucia.sacar(role);
+                plato=bandejaSucia.sacarPlato(role);
                 TimeUnit.SECONDS.sleep(rnd.nextInt(8)+4);
-                bandejaMojada.colocar(plato,role);
+                bandejaMojada.meterPlato(plato,role);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -10,15 +10,19 @@ public class Bandeja {
 
     public Bandeja(int nPlatos) {
         for (int i=0;i<nPlatos;i++){
-            platosEnBandeja.add(new Plato(i++));
+            platosEnBandeja.add(new Plato(i));
         }
     }
 
-    public void colocar(Plato plato, String role) throws InterruptedException {
+    public void meterPlato(Plato plato, String role) {
         synchronized (this){
             while (platosEnBandeja.size()>10){
                 System.out.println(LocalTime.now() + " -- " + " Please, " + role + " wait, there are no dishes");
-                wait();
+                try {
+                    wait();
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
             }
             platosEnBandeja.add(plato);
             System.out.println(LocalTime.now() + " -- " + role + " put the dish numbered with the serial: " + plato.getSerial());
@@ -26,12 +30,16 @@ public class Bandeja {
         }
     }
 
-    public Plato sacar(String role) throws InterruptedException {
+    public Plato sacarPlato(String role) {
         Plato plato;
         synchronized (this){
             while (platosEnBandeja.isEmpty()){
                 System.out.println(LocalTime.now() + " -- " + " Please, " + role + " there's no capacity for more dishes");
-                wait();
+                try {
+                    wait();
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
             }
             plato=platosEnBandeja.remove(0);
             System.out.println(LocalTime.now() + " -- " +role + " took the dish numbered with the serial: " + plato.getSerial());

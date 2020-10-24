@@ -21,9 +21,9 @@ public class Secador implements Runnable {
         Plato plato;
         while (!Thread.currentThread().isInterrupted()){
             try {
-                plato=bandejaMojada.sacar(role);
-                TimeUnit.SECONDS.sleep(rnd.nextInt(8)+4);
-                bandejaSeca.colocar(plato,role);
+                plato=bandejaMojada.sacarPlato(role);
+                TimeUnit.SECONDS.sleep(rnd.nextInt(3)+1);
+                bandejaSeca.meterPlato(plato,role);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

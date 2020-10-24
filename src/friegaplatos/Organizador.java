@@ -21,9 +21,9 @@ public class Organizador implements Runnable {
         Plato plato;
         while (!Thread.currentThread().isInterrupted()){
             try {
-                plato=bandejaSeca.sacar(role);
+                plato=bandejaSeca.sacarPlato(role);
                 TimeUnit.SECONDS.sleep(rnd.nextInt(8)+4);
-                alacena.colocar(plato,role);
+                alacena.meterPlato(plato,role);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
